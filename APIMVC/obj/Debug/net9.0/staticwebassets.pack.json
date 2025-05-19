@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets/APIMVC.0y027n06sy.bundle.scp.css"
     },
     {
+      "Id": "/Users/fernangal2004/Desktop/Programacion_IV_Galindo_Fernando/APIMVC/APIMVC/wwwroot/Imagenes/Fernando Galindo.jpg",
+      "PackagePath": "staticwebassets/Imagenes/Fernando Galindo.jpg"
+    },
+    {
+      "Id": "/Users/fernangal2004/Desktop/Programacion_IV_Galindo_Fernando/APIMVC/APIMVC/wwwroot/Imagenes/Juan Feijoo.jpeg",
+      "PackagePath": "staticwebassets/Imagenes/Juan Feijoo.jpeg"
+    },
+    {
+      "Id": "/Users/fernangal2004/Desktop/Programacion_IV_Galindo_Fernando/APIMVC/APIMVC/wwwroot/Imagenes/Michelle Reyes.jpeg",
+      "PackagePath": "staticwebassets/Imagenes/Michelle Reyes.jpeg"
+    },
+    {
       "Id": "/Users/fernangal2004/Desktop/Programacion_IV_Galindo_Fernando/APIMVC/APIMVC/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },
