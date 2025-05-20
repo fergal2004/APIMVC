@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APIMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8ae2ac17200539aa97ccbd190cf240ecda204ae1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fab9506fd5133e890dd4760b33e59d3977499dd6")]
 [assembly: System.Reflection.AssemblyProductAttribute("APIMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APIMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

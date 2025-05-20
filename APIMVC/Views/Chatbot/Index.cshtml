@@ -1,0 +1,244 @@
+﻿@{
+ViewData["Title"] = ViewBag.NombreChatbot;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.NombreChatbot</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos personalizados mínimos para el chat */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chat-messages {
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 15px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .user-message {
+            background-color: #e2f3ff;
+            text-align: right;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #f8f9fa;
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .chat-input-area {
+            display: flex;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .send-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: #155724;
+            margin-top: 10px;
+        }
+
+        /* Estilos para las tarjetas del equipo */
+        .team-card-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .team-card {
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: calc(32% - 20px);
+            background-color: rgba(233, 236, 239, 0.8);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+
+        .team-card p {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        
+    </style>
+</head>
+<body>
+<div class="container chat-container">
+    <div class="chat-header">
+        <h1>@ViewBag.NombreChatbot</h1>
+    </div>
+
+    <div class="team-card-container">
+        <div class="team-card">
+            <img src="~/Imagenes/Fernando Galindo.jpg" class="rounded-circle" alt="Miembro 1">
+            <h3>Fernando Galindo</h3>
+            <p>Correo: fernando.galindo@udla.edu.ec</p>
+            <p>Intereses: Futbol, Musica</p>
+        </div>
+        <div class="team-card">
+            <img src="~/Imagenes/Juan Feijoo.jpeg" class="rounded-circle" alt="Miembro 2">
+            <h3>Juan Feijoo</h3>
+            <p>Correo: juan.feijoo@udla.edu.ec</p>
+            <p>Intereses: Me gustan las mujeres, salir de fiesta y ser fiel a una sola mujer. Y el COD</p>
+        </div>
+        <div class="team-card">
+            <img src="~/Imagenes/Michelle Reyes.jpeg" class="rounded-circle" alt="Miembro 3">
+            <h3>Michelle Reyes</h3>
+            <p>Correo: michelle.reyes.delgado@udla.edu.ec</p>
+            <p>Intereses: Jugar volley</p>
+        </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+        @if (ViewBag.ChatHistory != null)
+        {
+        foreach (var mensaje in ViewBag.ChatHistory)
+        {
+        if (mensaje.EsUsuario)
+        {
+        <div class="message user-message">
+            <p><strong>Tú:</strong> @mensaje.Mensaje</p>
+        </div>
+        }
+        else
+        {
+        <div class="message bot-message">
+            <p><strong>@ViewBag.NombreChatbot:</strong> @Html.Raw(mensaje.Mensaje)</p>
+        </div>
+        }
+        }
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.Pregunta))
+        {
+        <div class="message user-message">
+            <p><strong>Tú:</strong> @ViewBag.Pregunta</p>
+        </div>
+        <div class="message bot-message">
+            <p><strong>@ViewBag.NombreChatbot:</strong></p>
+            @if (!string.IsNullOrEmpty(ViewBag.Respuesta))
+            {
+            <p style="color: black;">@Html.Raw(ViewBag.Respuesta)</p>
+            }
+            else
+            {
+            <p>No se pudo obtener una respuesta.</p>
+            }
+        </div>
+        @if (ViewBag.GuardadoExitoso == true)
+        {
+        <div class="success-message">Respuesta guardada.</div>
+        }
+        else if (ViewBag.GuardadoExitoso == false)
+        {
+        <div class="error-message">Error al guardar la respuesta.</div>
+        }
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+        <div class="error-message">@ViewBag.ErrorMessage</div>
+        }
+    </div>
+
+    <form asp-controller="Chatbot" asp-action="Preguntar" method="post" class="chat-input-area">
+        <input type="text" id="pregunta" name="pregunta" class="form-control chat-input" placeholder="Escribe tu pregunta...">
+        <button type="submit" class="btn btn-primary send-button">Enviar</button>
+    </form>
+
+    <div class="chat-footer mt-3 text-center">
+        <p>&copy; @DateTime.Now.Year - @ViewBag.NombreChatbot</p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Función para hacer scroll al final de los mensajes
+    $(document).ready(function () {
+        var chatMessages = $("#chatMessages");
+        chatMessages.scrollTop(chatMessages.prop("scrollHeight"));
+    });
+</script>
+</body>
+</html>
